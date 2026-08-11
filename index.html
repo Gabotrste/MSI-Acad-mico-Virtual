@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MSI Académico Virtual - Prototipo Completo</title>
+  <title>MSI Académico Virtual - Versión Definitiva</title>
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
@@ -16,15 +16,24 @@
 <body class="bg-slate-100 font-sans text-slate-800 min-h-screen flex flex-col justify-between">
 
   <!-- ========================================== -->
-  <!-- 1. PANTALLA DE LOGIN (INICIO)             -->
+  <!-- 1. PANTALLA DE LOGIN                       -->
   <!-- ========================================== -->
   <div id="pantallaLogin" class="min-h-screen flex items-center justify-center p-4 bg-slate-200">
     <div class="bg-white rounded-3xl shadow-2xl border-4 border-slate-300 w-full max-w-sm p-8 text-center space-y-6 relative overflow-hidden">
       
-      <div class="space-y-2">
-        <div class="inline-block border-2 border-indigo-900 p-3 rounded-xl bg-indigo-50">
-          <h1 class="text-3xl font-black text-indigo-950 tracking-wider leading-none">MSI</h1>
-          <p class="text-[10px] font-bold text-indigo-800 uppercase tracking-widest mt-1">Académico Virtual</p>
+      <!-- LOGO MSI OFICIAL INTEGRADO -->
+      <div class="flex flex-col items-center justify-center space-y-2">
+        <div class="w-32 h-32 relative flex items-center justify-center">
+          <svg viewBox="0 0 300 300" class="w-full h-full drop-shadow-md">
+            <!-- Fondo circular transparente/oscuro -->
+            <circle cx="150" cy="150" r="140" fill="none" stroke="#31356e" stroke-width="20" />
+            <!-- Texto estilizado msi -->
+            <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#31356e" font-family="'Comic Sans MS', 'Brush Script MT', cursive, sans-serif" font-size="125" font-weight="900" font-style="italic" letter-spacing="-3">msi</text>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-xl font-black text-indigo-950 uppercase tracking-wider">MSI ACADÉMICO</h1>
+          <p class="text-[10px] font-bold text-indigo-800 uppercase tracking-widest">Plataforma Virtual</p>
         </div>
       </div>
 
@@ -67,14 +76,23 @@
   <!-- ========================================== -->
   <div id="pantallaPrincipal" class="hidden min-h-screen flex flex-col">
     
-    <!-- BARRA SUPERIOR DE NAVEGACIÓN Y AUDITORÍA -->
-    <header class="bg-indigo-950 text-white px-4 py-2.5 shadow-md flex justify-between items-center sticky top-0 z-40">
+    <!-- BARRA SUPERIOR CON LOGO -->
+    <header class="bg-indigo-950 text-white px-4 py-2 shadow-md flex justify-between items-center sticky top-0 z-40">
       <div class="flex items-center space-x-3">
         <button onclick="toggleSidebar()" class="p-2 bg-indigo-800 hover:bg-indigo-700 rounded-lg text-white transition flex items-center space-x-1">
           <i data-lucide="menu" class="w-5 h-5"></i>
           <span class="text-xs font-bold hidden sm:inline">Menú</span>
         </button>
-        <span class="font-black text-lg tracking-wider cursor-pointer" onclick="mostrarVista('modulos')">MSI ACADÉMICO</span>
+
+        <div class="flex items-center space-x-2.5 cursor-pointer" onclick="mostrarVista('modulos')">
+          <div class="w-8 h-8 relative flex items-center justify-center">
+            <svg viewBox="0 0 300 300" class="w-full h-full">
+              <circle cx="150" cy="150" r="140" fill="none" stroke="#ffffff" stroke-width="22" />
+              <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="'Comic Sans MS', 'Brush Script MT', cursive, sans-serif" font-size="125" font-weight="900" font-style="italic" letter-spacing="-3">msi</text>
+            </svg>
+          </div>
+          <span class="font-black text-base md:text-lg tracking-wider">MSI ACADÉMICO</span>
+        </div>
       </div>
 
       <div class="flex items-center space-x-3 text-xs">
@@ -87,7 +105,7 @@
           Simular Offline
         </button>
 
-        <button onclick="abrirSemaforoModal()" class="bg-indigo-800 hover:bg-indigo-700 px-2.5 py-1 rounded flex items-center space-x-1 font-bold text-amber-300 border border-indigo-600">
+        <button onclick="abrirSemaforoModal()" class="bg-indigo-800 hover:bg-indigo-700 px-2.5 py-1 rounded flex items-center space-x-1 font-bold text-amber-300 border border-indigo-600 shadow">
           <i data-lucide="activity" class="w-3.5 h-3.5"></i>
           <span>Semáforo</span>
         </button>
@@ -101,16 +119,16 @@
       </div>
     </header>
 
-    <!-- BANNER MODO OFFLINE -->
+    <!-- BANNER OFFLINE -->
     <div id="offlineBanner" class="hidden bg-amber-500 text-amber-950 text-xs px-4 py-1.5 font-bold flex items-center justify-center space-x-2 shadow-inner">
       <i data-lucide="wifi-off" class="w-4 h-4"></i>
-      <span>MODO OFFLINE ACTIVO: Respaldo local de 24h habilitado. Tus cambios se sincronizarán automáticamente al reconectar.</span>
+      <span>MODO OFFLINE ACTIVO: Respaldo local de 24h habilitado. Tus cambios se sincronizan automáticamente al reconectar.</span>
     </div>
 
     <!-- ESTRUCTURA CENTRAL -->
     <div class="flex-1 flex overflow-hidden relative">
 
-      <!-- PESTAÑA / MENÚ LATERAL DESPLEGABLE -->
+      <!-- MENÚ LATERAL -->
       <aside id="sidebar" class="w-64 bg-white border-r-2 border-slate-300 flex flex-col justify-between p-4 fixed md:relative inset-y-0 left-0 z-30 transform -translate-x-full md:translate-x-0 sidebar-transition shadow-xl md:shadow-none">
         
         <div class="space-y-5">
@@ -124,7 +142,6 @@
             </div>
           </div>
 
-          <!-- Opciones de Navegación -->
           <nav class="space-y-1 text-xs font-bold text-slate-700">
             <button onclick="mostrarVista('modulos')" id="nav-modulos" class="w-full flex items-center space-x-2 px-3 py-2 rounded-lg bg-indigo-50 text-indigo-900 font-bold text-left">
               <i data-lucide="book-open" class="w-4 h-4 text-indigo-900"></i>
@@ -172,12 +189,10 @@
         </div>
       </aside>
 
-      <!-- ÁREA DE CONTENIDO DINÁMICO -->
+      <!-- ÁREA DE CONTENIDO -->
       <main class="flex-1 p-4 md:p-6 overflow-y-auto bg-slate-50">
 
-        <!-- ========================================== -->
-        <!-- VISTA 1: MÓDULOS (BOCETO FIEL)             -->
-        <!-- ========================================== -->
+        <!-- VISTA MÓDULOS -->
         <section id="vistaModulos" class="max-w-4xl mx-auto space-y-6">
           <div class="border-b-2 border-indigo-900 pb-2 flex justify-between items-center">
             <h2 class="text-2xl font-black text-indigo-950 uppercase tracking-wide">Menú de Módulos</h2>
@@ -187,13 +202,12 @@
           <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
             <div class="md:col-span-9 space-y-4">
 
-              <!-- NIVEL 1 (MÓDULO 1 HABILITADO) -->
+              <!-- NIVEL 1 -->
               <div class="bg-white border-2 border-indigo-900 rounded-xl p-4 shadow-sm space-y-3">
                 <div class="border-b border-indigo-200 pb-1">
                   <h3 class="text-lg font-black text-indigo-900">NIVEL 1</h3>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <!-- MÓDULO 1 ACCESIBLE -->
                   <div onclick="mostrarVista('tareas')" class="border-2 border-emerald-500 rounded-lg p-3 bg-emerald-50/40 hover:bg-emerald-100/50 cursor-pointer transition relative group">
                     <span class="text-[10px] font-bold text-emerald-800 block">1-1 (ACTIVO)</span>
                     <p class="font-extrabold text-sm text-slate-900">MÓDULO 1:</p>
@@ -201,7 +215,6 @@
                     <span class="absolute right-2 top-2 bg-emerald-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">Entrar ➔</span>
                   </div>
 
-                  <!-- MÓDULO 2 BLOQUEADO -->
                   <div onclick="bloqueadoAlert('Módulo 2: El Poder de una visión')" class="border border-slate-300 rounded-lg p-3 bg-slate-100 opacity-75 cursor-not-allowed relative">
                     <span class="text-[10px] font-bold text-slate-500 block">1-2</span>
                     <p class="font-extrabold text-sm text-slate-700">MÓDULO 2:</p>
@@ -211,7 +224,7 @@
                 </div>
               </div>
 
-              <!-- NIVEL 2 BLOQUEADO -->
+              <!-- NIVEL 2 -->
               <div class="bg-white border-2 border-indigo-900 rounded-xl p-4 shadow-sm space-y-3 opacity-80">
                 <div class="border-b border-indigo-200 pb-1 flex justify-between items-center">
                   <h3 class="text-lg font-black text-indigo-900">NIVEL 2</h3>
@@ -231,7 +244,7 @@
                 </div>
               </div>
 
-              <!-- NIVEL 3 BLOQUEADO -->
+              <!-- NIVEL 3 -->
               <div class="bg-white border-2 border-indigo-900 rounded-xl p-4 shadow-sm space-y-3 opacity-80">
                 <div class="border-b border-indigo-200 pb-1 flex justify-between items-center">
                   <h3 class="text-lg font-black text-indigo-900">NIVEL 3</h3>
@@ -253,7 +266,6 @@
 
             </div>
 
-            <!-- Íconos del Boceto -->
             <div class="md:col-span-3 flex md:flex-col justify-around items-center space-y-8 pt-4">
               <div class="p-3 border-2 border-indigo-900 rounded-xl bg-white shadow text-center">
                 <span class="text-3xl">✝️</span>
@@ -271,10 +283,7 @@
           </div>
         </section>
 
-
-        <!-- ========================================== -->
-        <!-- VISTA 2: TAREAS (MÓDULO 1 - CON AUTORRELLENO) -->
-        <!-- ========================================== -->
+        <!-- VISTA TAREAS -->
         <section id="vistaTareas" class="hidden max-w-3xl mx-auto space-y-6">
           <div class="bg-white border-2 border-indigo-900 rounded-2xl p-6 shadow-md">
             
@@ -321,12 +330,12 @@
               <div class="space-y-3 pt-2">
                 <div>
                   <label class="block text-xs font-bold text-slate-800 mb-1">PREGUNTA 1: Explique el principio fundamental abordado en el Módulo 1.</label>
-                  <textarea rows="2" required class="w-full border border-slate-300 rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-indigo-900" placeholder="Escriba su respuesta aquí..."></textarea>
+                  <textarea id="respP1" rows="2" required class="w-full border border-slate-300 rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-indigo-900" placeholder="Escriba su respuesta aquí..."></textarea>
                 </div>
 
                 <div>
                   <label class="block text-xs font-bold text-slate-800 mb-1">PREGUNTA 2: ¿Cómo aplica este aprendizaje en su entorno familiar o comunitario?</label>
-                  <textarea rows="2" required class="w-full border border-slate-300 rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-indigo-900" placeholder="Escriba su respuesta aquí..."></textarea>
+                  <textarea id="respP2" rows="2" required class="w-full border border-slate-300 rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-indigo-900" placeholder="Escriba su respuesta aquí..."></textarea>
                 </div>
               </div>
 
@@ -343,10 +352,7 @@
           </div>
         </section>
 
-
-        <!-- ========================================== -->
-        <!-- VISTA 3: CALENDARIO ACADÉMICO              -->
-        <!-- ========================================== -->
+        <!-- VISTA CALENDARIO -->
         <section id="vistaCalendario" class="hidden max-w-4xl mx-auto space-y-4">
           <div class="bg-white border-2 border-indigo-900 rounded-2xl p-6 shadow-md space-y-4">
             <div class="flex justify-between items-center border-b pb-3">
@@ -374,10 +380,7 @@
           </div>
         </section>
 
-
-        <!-- ========================================== -->
-        <!-- VISTA 4: EVALUACIONES Y LECCIONES          -->
-        <!-- ========================================== -->
+        <!-- VISTA EVALUACIONES -->
         <section id="vistaEvaluaciones" class="hidden max-w-4xl mx-auto space-y-4">
           <div class="bg-white border-2 border-indigo-900 rounded-2xl p-6 shadow-md space-y-4">
             <h2 class="text-xl font-black text-indigo-950 border-b pb-2">EVALUACIONES Y LECCIONES CORTAS</h2>
@@ -389,36 +392,23 @@
                   <h4 class="font-extrabold text-sm text-slate-900 mt-1">Cuestionario #1: Conceptos del Origen</h4>
                   <p class="text-slate-500">Duración: 15 minutos | Intentos permitidos: 2</p>
                 </div>
-                <button onclick="alert('Iniciando intento de prueba para Cuestionario #1...')" class="bg-indigo-900 text-white font-bold px-4 py-2 rounded-lg">Rendir Lección</button>
-              </div>
-
-              <div class="p-4 border border-slate-300 rounded-xl flex justify-between items-center bg-slate-50 opacity-75">
-                <div>
-                  <span class="text-[10px] font-bold bg-slate-200 text-slate-700 px-2 py-0.5 rounded">Módulo 2</span>
-                  <h4 class="font-extrabold text-sm text-slate-700 mt-1">Cuestionario #2: La Visión</h4>
-                  <p class="text-slate-500">Bloqueado hasta aprobar el Módulo 1.</p>
-                </div>
-                <i data-lucide="lock" class="w-5 h-5 text-slate-400"></i>
+                <button onclick="alert('Iniciando lección de prueba...')" class="bg-indigo-900 text-white font-bold px-4 py-2 rounded-lg">Rendir Lección</button>
               </div>
             </div>
           </div>
         </section>
 
-
-        <!-- ========================================== -->
-        <!-- VISTA 5: REUNIONES VIRTUALES               -->
-        <!-- ========================================== -->
+        <!-- VISTA REUNIONES -->
         <section id="vistaReuniones" class="hidden max-w-4xl mx-auto space-y-4">
           <div class="bg-white border-2 border-indigo-900 rounded-2xl p-6 shadow-md space-y-4">
             <h2 class="text-xl font-black text-indigo-950 border-b pb-2">SALAS DE REUNIONES VIRTUALES</h2>
-
             <div class="p-4 border-2 border-emerald-500 bg-emerald-50/30 rounded-xl flex justify-between items-center">
-              <div class="space-y-1">
-                <span class="inline-block bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">SALA EN VIVO AHORA</span>
+              <div>
+                <span class="inline-block bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded">EN VIVO AHORA</span>
                 <h4 class="font-black text-base text-slate-900">Tutoría General: Revisión Módulo 1</h4>
-                <p class="text-xs text-slate-600">Docente: Dra. María Augusta | Participantes: 18 estudiantes en línea</p>
+                <p class="text-xs text-slate-600">Docente: Dra. María Augusta | Participantes: 18 estudiantes</p>
               </div>
-              <button onclick="alert('Conectando a la sala de videoconferencia en vivo...')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow flex items-center space-x-1">
+              <button onclick="alert('Conectando a videoconferencia...')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow flex items-center space-x-1">
                 <i data-lucide="video" class="w-4 h-4"></i>
                 <span>Unirme a Clase</span>
               </button>
@@ -426,44 +416,31 @@
           </div>
         </section>
 
-
-        <!-- ========================================== -->
-        <!-- VISTA 6: RETROALIMENTACIÓN                 -->
-        <!-- ========================================== -->
+        <!-- VISTA RETROALIMENTACIÓN -->
         <section id="vistaRetroalimentacion" class="hidden max-w-4xl mx-auto space-y-4">
           <div class="bg-white border-2 border-indigo-900 rounded-2xl p-6 shadow-md space-y-4">
             <h2 class="text-xl font-black text-indigo-950 border-b pb-2">RETROALIMENTACIÓN DOCENTE</h2>
-
             <div class="p-4 border border-indigo-200 bg-indigo-50/40 rounded-xl space-y-2">
               <div class="flex justify-between items-center">
                 <span class="font-extrabold text-sm text-indigo-950">Tarea 1: Versículos y Estudio de Caso</span>
-                <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full">Calificación: 9.5/10</span>
+                <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full">Nota: 9.5/10</span>
               </div>
-              <p class="text-xs text-slate-700 italic">"Excelente análisis Gabriel. Has estructurado muy bien la respuesta sobre la visión en la pregunta 2. Solo recuerda citar los textos clave en el formato indicado."</p>
-              <p class="text-[10px] font-bold text-slate-400">Comentario dejado por Tutor asignado - Hace 2 días</p>
+              <p class="text-xs text-slate-700 italic">"Excelente análisis Gabriel. Has estructurado muy bien tus explicaciones."</p>
             </div>
           </div>
         </section>
 
-
-        <!-- ========================================== -->
-        <!-- VISTA 7: CARPETA DE RESPALDOS              -->
-        <!-- ========================================== -->
+        <!-- VISTA RESPALDOS -->
         <section id="vistaRespaldos" class="hidden max-w-3xl mx-auto space-y-4">
           <div class="bg-white border-2 border-indigo-900 rounded-2xl p-6 shadow-md space-y-4">
-            <h2 class="text-xl font-black text-indigo-950">CARPETA DE RESPALDOS Y HISTORIAL</h2>
-            <p class="text-xs font-medium text-slate-500">Evidencias respaldadas localmente e integración con mensajería.</p>
-
+            <h2 class="text-xl font-black text-indigo-950">CARPETA DE RESPALDOS</h2>
             <div id="listaRespaldos" class="space-y-3">
-              <div class="p-4 border border-slate-300 rounded-xl flex flex-col sm:flex-row justify-between sm:items-center gap-3 bg-slate-50">
+              <div class="p-4 border border-slate-300 rounded-xl flex justify-between items-center bg-slate-50">
                 <div>
                   <p class="text-xs font-bold text-slate-900">Tarea_1_Versiculos_GabrielVasquez.pdf</p>
-                  <p class="text-[10px] text-slate-500">Guardado el: 01/07/2026 16:30 | Hash: #RES-9981-OK</p>
+                  <p class="text-[10px] text-slate-500">01/07/2026 16:30 | Hash: #RES-9981-OK</p>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-lg">Nota: 9.5/10</span>
-                  <button onclick="alert('Documento adjuntado automáticamente a tu siguiente mensaje para el docente.')" class="text-xs bg-indigo-900 hover:bg-indigo-800 text-white font-bold px-3 py-1.5 rounded-lg transition">Adjuntar a Correo</button>
-                </div>
+                <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-lg">Nota: 9.5/10</span>
               </div>
             </div>
           </div>
@@ -482,96 +459,109 @@
 
 
   <!-- ========================================== -->
-  <!-- 3. MODAL DE SEMÁFORO EMOCIONAL & CHAT     -->
+  <!-- 3. MODALES DE SEMÁFORO Y CHAT DE ALUMNOS   -->
   <!-- ========================================== -->
   <div id="modalSemaforo" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl border-2 border-indigo-900">
-      <div class="flex justify-between items-center border-b pb-2">
-        <h3 class="font-black text-lg text-indigo-950">SEMÁFORO EMOCIONAL Y ACADÉMICO</h3>
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 space-y-4 shadow-2xl border-2 border-indigo-900">
+      <div class="flex justify-between items-center border-b pb-3">
+        <div>
+          <h3 class="font-black text-lg text-indigo-950 flex items-center gap-2">
+            <span>SEMÁFORO EMOCIONAL Y ACADÉMICO</span>
+            <span class="text-xs bg-indigo-100 text-indigo-900 font-bold px-2.5 py-0.5 rounded-full">4 Alumnos</span>
+          </h3>
+          <p class="text-xs text-slate-500">Monitoreo continuo de desempeño, entrega de tareas y estado actitudinal.</p>
+        </div>
         <button onclick="cerrarSemaforoModal()" class="text-slate-400 hover:text-slate-800 font-bold text-lg">✕</button>
       </div>
 
-      <div class="bg-indigo-50 border border-indigo-200 p-2.5 rounded-lg text-xs text-indigo-900 flex items-center space-x-2">
-        <i data-lucide="lock" class="w-4 h-4 text-indigo-700 shrink-0"></i>
-        <span><strong>Privacidad Garantizada:</strong> La vista de rendimiento es confidencial entre el alumno y su tutor.</span>
-      </div>
-
-      <!-- Filtros Rápidos -->
-      <div class="flex space-x-2 text-xs font-bold">
-        <button onclick="filtrarSemaforo('todos')" class="bg-slate-200 px-2.5 py-1 rounded">Todos</button>
-        <button onclick="filtrarSemaforo('rojo')" class="bg-red-100 text-red-700 px-2.5 py-1 rounded">🔴 Alerta</button>
-        <button onclick="filtrarSemaforo('amarillo')" class="bg-amber-100 text-amber-700 px-2.5 py-1 rounded">🟡 Regular</button>
-        <button onclick="filtrarSemaforo('verde')" class="bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded">🟢 Al día</button>
-      </div>
-
-      <!-- Lista de Alumnos -->
-      <div class="space-y-2 text-xs max-h-60 overflow-y-auto">
+      <div class="space-y-3 text-xs max-h-80 overflow-y-auto pr-1">
         
-        <!-- Carlos Mendoza (🔴 Alerta) -->
-        <div class="item-sem sem-rojo p-3 bg-red-50 border border-red-200 rounded-lg flex justify-between items-center">
-          <div>
-            <p class="font-bold text-slate-800">Carlos Mendoza 🔴</p>
-            <p class="text-[11px] text-slate-600">Nota Actual: <strong class="text-red-600">4.5/10</strong> | Pendiente: Tarea 1</p>
+        <div class="p-3.5 bg-red-50/80 border border-red-200 rounded-xl flex justify-between items-center hover:shadow-sm transition">
+          <div class="space-y-1">
+            <div class="flex items-center space-x-2">
+              <span class="font-extrabold text-sm text-slate-900">Carlos Mendoza</span>
+              <span class="bg-red-600 text-white font-bold text-[10px] px-2 py-0.5 rounded-full">🔴 Alerta Crítica</span>
+            </div>
+            <p class="text-slate-600 text-[11px]">Nota Promedio: <strong class="text-red-700">4.5/10</strong> | Tareas Entregadas: <strong>1/4</strong></p>
+            <p class="text-[11px] text-slate-500 italic">"Presenta ausencias y problemas de conexión. Requiere tutoría urgente."</p>
           </div>
-          <button onclick="abrirChatEstudiante('Carlos Mendoza', '🔴 Alerta')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded font-bold transition">Abrir Chat</button>
+          <button onclick="abrirChatEstudiante('Carlos Mendoza', '🔴 Alerta Crítica')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg font-bold shadow transition flex items-center space-x-1 shrink-0 ml-2">
+            <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+            <span>Abrir Chat</span>
+          </button>
         </div>
 
-        <!-- María Delgado (🟡 Regular) -->
-        <div class="item-sem sem-amarillo p-3 bg-amber-50 border border-amber-200 rounded-lg flex justify-between items-center">
-          <div>
-            <p class="font-bold text-slate-800">María Delgado 🟡</p>
-            <p class="text-[11px] text-slate-600">Nota Actual: <strong class="text-amber-600">7.0/10</strong> | Faltan evidencias</p>
+        <div class="p-3.5 bg-amber-50/80 border border-amber-200 rounded-xl flex justify-between items-center hover:shadow-sm transition">
+          <div class="space-y-1">
+            <div class="flex items-center space-x-2">
+              <span class="font-extrabold text-sm text-slate-900">Andrea Benítez</span>
+              <span class="bg-amber-500 text-amber-950 font-bold text-[10px] px-2 py-0.5 rounded-full">🟡 En Observación</span>
+            </div>
+            <p class="text-slate-600 text-[11px]">Nota Promedio: <strong class="text-amber-800">6.8/10</strong> | Tareas Entregadas: <strong>3/4</strong></p>
+            <p class="text-[11px] text-slate-500 italic">"Ha entregado trabajos con retraso pero muestra disposición."</p>
           </div>
-          <button onclick="abrirChatEstudiante('María Delgado', '🟡 Regular')" class="bg-amber-600 hover:bg-amber-700 text-white px-3 py-1.5 rounded font-bold transition">Abrir Chat</button>
+          <button onclick="abrirChatEstudiante('Andrea Benítez', '🟡 En Observación')" class="bg-amber-500 hover:bg-amber-600 text-amber-950 px-3 py-2 rounded-lg font-bold shadow transition flex items-center space-x-1 shrink-0 ml-2">
+            <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+            <span>Abrir Chat</span>
+          </button>
         </div>
 
-        <!-- Gabriel Vásquez (🟢 Al día) -->
-        <div class="item-sem sem-verde p-3 bg-emerald-50 border border-emerald-200 rounded-lg flex justify-between items-center">
-          <div>
-            <p class="font-bold text-slate-800">Gabriel Vásquez 🟢</p>
-            <p class="text-[11px] text-slate-600">Nota Actual: <strong class="text-emerald-600">9.5/10</strong> | Al día con entregas</p>
+        <div class="p-3.5 bg-emerald-50/80 border border-emerald-200 rounded-xl flex justify-between items-center hover:shadow-sm transition">
+          <div class="space-y-1">
+            <div class="flex items-center space-x-2">
+              <span class="font-extrabold text-sm text-slate-900">Mateo Ortiz</span>
+              <span class="bg-emerald-600 text-white font-bold text-[10px] px-2 py-0.5 rounded-full">🟢 Desempeño Alto</span>
+            </div>
+            <p class="text-slate-600 text-[11px]">Nota Promedio: <strong class="text-emerald-800">9.2/10</strong> | Tareas Entregadas: <strong>4/4</strong></p>
+            <p class="text-[11px] text-slate-500 italic">"Participación activa en foros y avance constante."</p>
           </div>
-          <span class="text-emerald-700 font-bold bg-emerald-100 px-2 py-0.5 rounded">Excelente</span>
+          <button onclick="abrirChatEstudiante('Mateo Ortiz', '🟢 Desempeño Alto')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg font-bold shadow transition flex items-center space-x-1 shrink-0 ml-2">
+            <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+            <span>Abrir Chat</span>
+          </button>
+        </div>
+
+        <div class="p-3.5 bg-emerald-50/80 border border-emerald-200 rounded-xl flex justify-between items-center hover:shadow-sm transition">
+          <div class="space-y-1">
+            <div class="flex items-center space-x-2">
+              <span class="font-extrabold text-sm text-slate-900">Sofía Villacís</span>
+              <span class="bg-emerald-600 text-white font-bold text-[10px] px-2 py-0.5 rounded-full">🟢 Desempeño Alto</span>
+            </div>
+            <p class="text-slate-600 text-[11px]">Nota Promedio: <strong class="text-emerald-800">9.8/10</strong> | Tareas Entregadas: <strong>4/4</strong></p>
+            <p class="text-[11px] text-slate-500 italic">"Excelente nivel académico y liderazgo grupal."</p>
+          </div>
+          <button onclick="abrirChatEstudiante('Sofía Villacís', '🟢 Desempeño Alto')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-lg font-bold shadow transition flex items-center space-x-1 shrink-0 ml-2">
+            <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+            <span>Abrir Chat</span>
+          </button>
         </div>
 
       </div>
     </div>
   </div>
 
-
-  <!-- MODAL SECUNDARIO: VENTANA DE CHAT CON CARLOS MENDOZA / ALUMNOS -->
   <div id="modalChatEstudiante" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full p-5 space-y-3 shadow-2xl border-2 border-indigo-900 flex flex-col h-[480px]">
+    <div class="bg-white rounded-2xl max-w-md w-full p-5 space-y-3 shadow-2xl border-2 border-indigo-900 flex flex-col h-[520px]">
       
-      <div class="flex justify-between items-center border-b pb-2">
+      <div class="flex justify-between items-center border-b pb-2.5">
+        <div>
+          <h4 class="font-black text-sm text-slate-900" id="chatStudentName">Carlos Mendoza</h4>
+          <span id="chatStudentStatus" class="text-[10px] font-bold text-red-600">🔴 Alerta Crítica</span>
+        </div>
+        <button onclick="cerrarChatEstudiante()" class="text-slate-400 hover:text-slate-800 font-bold text-lg">✕</button>
+      </div>
+
+      <div id="chatHistory" class="flex-1 bg-slate-50 p-3 rounded-xl border border-slate-200 overflow-y-auto space-y-3 text-xs chat-scroll">
+      </div>
+
+      <div class="border-t pt-2 space-y-2">
         <div class="flex items-center space-x-2">
-          <div class="w-8 h-8 rounded-full bg-indigo-900 text-white flex items-center justify-center font-bold text-xs" id="chatInitials">CM</div>
-          <div>
-            <h4 class="font-bold text-sm text-slate-900" id="chatStudentName">Carlos Mendoza</h4>
-            <p class="text-[10px] text-slate-500" id="chatStudentStatus">Estado: 🔴 En Alerta Académica</p>
-          </div>
-        </div>
-        <button onclick="cerrarChatEstudiante()" class="text-slate-400 hover:text-slate-800 font-bold">✕</button>
-      </div>
-
-      <!-- Area de Mensajes -->
-      <div id="chatHistory" class="flex-1 bg-slate-50 p-3 rounded-xl border border-slate-200 overflow-y-auto space-y-2 text-xs chat-scroll">
-        <div class="bg-red-100 border border-red-200 text-red-900 p-2 rounded-lg max-w-[90%]">
-          <strong>Sistema de Alertas:</strong> El estudiante ha ingresado al estado de Alerta debido a tareas pendientes del Módulo 1.
-        </div>
-      </div>
-
-      <!-- Opciones de Mensajes Predeterminados para el Tutor -->
-      <div class="space-y-1.5 pt-2 border-t">
-        <p class="text-[10px] font-bold text-slate-500 uppercase">Mensajes rápidos de acompañamiento:</p>
-        <div class="grid grid-cols-1 gap-1">
-          <button onclick="enviarMensajeTutor('Hola Carlos, noté que tienes pendiente la Tarea 1. ¿Cómo te puedo ayudar a ponerte al día?')" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-900 text-left px-2.5 py-1.5 rounded text-[11px] font-medium border border-indigo-200 truncate">
-            📩 "¿Cómo te puedo ayudar a ponerte al día?"
-          </button>
-          <button onclick="enviarMensajeTutor('Carlos, recuerda que cuentas con la asistencia de la IA y la carpeta de respaldos para subir tu entrega.')" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-900 text-left px-2.5 py-1.5 rounded text-[11px] font-medium border border-indigo-200 truncate">
-            📩 "Recuerda que cuentas con la IA para apoyarte"
+          <input id="inputChatEstudiante" type="text" placeholder="Escribe un mensaje o indicación..." class="flex-1 border-2 border-slate-300 p-2 rounded-xl text-xs outline-none focus:border-indigo-900" onkeypress="if(event.key==='Enter') enviarMensajeEstudiante()">
+          <button onclick="enviarMensajeEstudiante()" class="bg-indigo-900 hover:bg-indigo-800 text-white p-2 rounded-xl font-bold shadow transition">
+            <i data-lucide="send" class="w-4 h-4"></i>
           </button>
         </div>
+        <p class="text-[10px] text-slate-400 text-center">Tutoría Directa — Mensajería Interna MSI</p>
       </div>
 
     </div>
@@ -579,82 +569,89 @@
 
 
   <!-- ========================================== -->
-  <!-- 4. ASISTENTE IA FLOTANTE (IDEA #3)         -->
+  <!-- 4. ASISTENTE AURA (IA DINÁMICA LOCAL)       -->
   <!-- ========================================== -->
   <div id="aiWidget" class="hidden fixed bottom-4 right-4 z-50">
     
     <div id="aiTooltip" class="mb-2 bg-indigo-900 text-white text-xs p-3 rounded-xl shadow-xl max-w-xs flex justify-between items-start animate-bounce">
       <div>
-        <p class="font-bold">¿Tienes dudas con la clase?</p>
-        <p class="text-indigo-200 text-[11px]">Chatea con el asistente IA o solicita tutoría.</p>
+        <p class="font-bold">Aura IA Activa</p>
+        <p class="text-indigo-200 text-[11px]">Pregúntame lo que quieras sobre el curso o cualquier duda general.</p>
       </div>
       <button onclick="cerrarTooltip()" class="text-indigo-300 hover:text-white ml-2">✕</button>
     </div>
 
-    <!-- Ventana del Chat IA -->
-    <div id="aiChatWindow" class="hidden w-80 sm:w-88 bg-white rounded-2xl shadow-2xl border-2 border-indigo-900 overflow-hidden flex flex-col h-96 text-xs">
+    <div id="aiChatWindow" class="hidden w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border-2 border-indigo-900 overflow-hidden flex flex-col h-[480px] text-xs">
       <div class="bg-indigo-950 text-white p-3 flex justify-between items-center">
         <span class="font-bold flex items-center space-x-1.5">
-          <i data-lucide="bot" class="w-4 h-4 text-indigo-300"></i>
-          <span>Asistente Pedagógico IA</span>
+          <i data-lucide="bot" class="w-4 h-4 text-emerald-400"></i>
+          <span>Aura — Asistente IA Integrado</span>
         </span>
-        <button onclick="toggleAiChat()" class="text-indigo-200">✕</button>
+        <button onclick="toggleAiChat()" class="text-indigo-200 hover:text-white font-bold">✕</button>
       </div>
 
-      <div id="chatMessages" class="flex-1 p-3 overflow-y-auto space-y-2 bg-slate-50 chat-scroll">
-        <div class="bg-indigo-100 text-indigo-900 p-2.5 rounded-lg max-w-[85%]">
-          ¡Hola Gabriel! Soy la IA de soporte académico. ¿Qué duda tienes sobre los temas del Módulo 1 o la entrega de tareas?
+      <div id="chatMessages" class="flex-1 p-3 overflow-y-auto space-y-3 bg-slate-50 chat-scroll">
+        <div class="bg-indigo-100 text-indigo-950 p-3 rounded-xl max-w-[90%] shadow-sm leading-relaxed">
+          ¡Hola Gabriel! 👋 Soy **Aura**, tu asistente dentro de MSI Académico. Estoy configurada para responder tus dudas sobre los módulos, ayudarte con las tareas o darte orientación general. ¿En qué trabajamos hoy?
         </div>
       </div>
 
-      <div class="p-2 border-t bg-white space-y-2">
-        <div class="flex space-x-1 overflow-x-auto text-[10px] pb-1">
-          <button onclick="enviarMensajeRapido('Resumen del Módulo 1')" class="bg-indigo-50 text-indigo-900 p-1 rounded border whitespace-nowrap">📚 Resumen Módulo 1</button>
-          <button onclick="enviarMensajeRapido('¿Cómo funciona el autorrelleno?')" class="bg-slate-100 p-1 rounded border whitespace-nowrap">⚡ Función Autorrelleno</button>
-        </div>
-        
-        <div class="flex items-center space-x-1">
-          <input id="chatInput" type="text" placeholder="Escribe tu consulta..." class="flex-1 border p-1.5 rounded outline-none text-xs">
-          <button onclick="enviarMensajeIA()" class="bg-indigo-900 text-white p-1.5 rounded">
-            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+      <div class="p-2.5 border-t bg-white space-y-2">
+        <div class="flex items-center space-x-1.5">
+          <input id="chatInput" type="text" placeholder="Escribe cualquier pregunta..." class="flex-1 border-2 border-slate-300 p-2 rounded-xl outline-none text-xs focus:border-indigo-900" onkeypress="if(event.key==='Enter') enviarMensajeIA()">
+          <button onclick="enviarMensajeIA()" class="bg-indigo-900 hover:bg-indigo-800 text-white p-2 rounded-xl shadow transition">
+            <i data-lucide="send" class="w-4 h-4"></i>
           </button>
         </div>
 
-        <button onclick="alert('Tu consulta ha sido transferida directamente al buzón prioritario de tu tutor.')" class="w-full text-center text-[10px] text-amber-700 hover:underline font-bold pt-1 block">
-          ¿No resolvió tu duda? ➔ Transferir a Tutor
-        </button>
+        <div class="flex justify-between items-center text-[10px] text-slate-500 px-1">
+          <span class="text-emerald-600 font-bold">🟢 Motor IA Dinámico Local</span>
+          <span class="text-indigo-900 font-bold">MSI Virtual</span>
+        </div>
       </div>
     </div>
 
-    <button onclick="toggleAiChat()" class="ml-auto flex items-center justify-center w-12 h-12 bg-indigo-900 text-white rounded-full shadow-xl hover:bg-indigo-800">
-      <i data-lucide="message-square" class="w-6 h-6"></i>
+    <button onclick="toggleAiChat()" class="ml-auto flex items-center justify-center w-12 h-12 bg-indigo-900 text-white rounded-full shadow-2xl hover:bg-indigo-800 transition transform hover:scale-105">
+      <i data-lucide="bot" class="w-6 h-6 text-emerald-400"></i>
     </button>
   </div>
 
 
   <!-- ========================================== -->
-  <!-- 5. LÓGICA DE INTERACCIÓN (JAVASCRIPT)     -->
+  <!-- 5. LÓGICA Y JAVASCRIPT                     -->
   <!-- ========================================== -->
   <script>
     lucide.createIcons();
 
     let sidebarAbierto = false;
     let esOffline = false;
-    let estudianteChatActual = "";
+    let alumnoChatActual = "";
 
-    // 1. AUTENTICACIÓN
+    const chatsEstudiantes = {
+      "Carlos Mendoza": [
+        { autor: "sistema", texto: "🔴 Alerta generada: Inasistencia reiterada y calificación de 4.5/10 en el Módulo 1." },
+        { autor: "Carlos Mendoza", texto: "Profesor, buenas tardes. He tenido problemas de salud y fallas en mi conexión de internet esta semana." },
+        { autor: "tutor", texto: "Hola Carlos. Entendido. Recuerda que la Tarea 1 tiene plazo de entrega. ¿Necesitas una prórroga para subir tu respaldo?" }
+      ],
+      "Andrea Benítez": [
+        { autor: "sistema", texto: "🟡 Registro: Tarea entregada con 24h de retraso." },
+        { autor: "Andrea Benítez", texto: "Buenas tardes, ya logré subir la actividad del Módulo 1. Quedo atenta a sus comentarios." }
+      ],
+      "Mateo Ortiz": [
+        { autor: "sistema", texto: "🟢 Rendimiento Destacado: Evaluación aprobada con 9.2/10." },
+        { autor: "Mateo Ortiz", texto: "Estimado tutor, una consulta sobre la bibliografía del Nivel 2, ¿estará disponible esta semana?" }
+      ],
+      "Sofía Villacís": [
+        { autor: "sistema", texto: "🟢 Excelente desempeño académico registrado." },
+        { autor: "Sofía Villacís", texto: "Todo claro con las lecturas del Módulo 1. ¡Gracias!" }
+      ]
+    };
+
     function validarLogin(e) {
       e.preventDefault();
-      const user = document.getElementById('loginUsuario').value.trim();
-      const pin = document.getElementById('loginPin').value.trim();
-
-      if (user === 'VASQUEZ021' && pin === '1234') {
-        document.getElementById('pantallaLogin').classList.add('hidden');
-        document.getElementById('pantallaPrincipal').classList.remove('hidden');
-        document.getElementById('aiWidget').classList.remove('hidden');
-      } else {
-        alert('Credenciales incorrectas. Usa Usuario: VASQUEZ021 y PIN: 1234');
-      }
+      document.getElementById('pantallaLogin').classList.add('hidden');
+      document.getElementById('pantallaPrincipal').classList.remove('hidden');
+      document.getElementById('aiWidget').classList.remove('hidden');
     }
 
     function cerrarSesion() {
@@ -663,15 +660,11 @@
       document.getElementById('pantallaLogin').classList.remove('hidden');
     }
 
-    // 2. NAVEGACIÓN Y VISTAS
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
       sidebarAbierto = !sidebarAbierto;
-      if (sidebarAbierto) {
-        sidebar.classList.remove('-translate-x-full');
-      } else {
-        sidebar.classList.add('-translate-x-full');
-      }
+      if (sidebarAbierto) sidebar.classList.remove('-translate-x-full');
+      else sidebar.classList.add('-translate-x-full');
     }
 
     function mostrarVista(vista) {
@@ -679,30 +672,21 @@
       vistas.forEach(v => {
         const el = document.getElementById('vista' + v.charAt(0).toUpperCase() + v.slice(1));
         if (el) el.classList.add('hidden');
-        
-        const navBtn = document.getElementById('nav-' + v);
-        if (navBtn) navBtn.className = "w-full flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-slate-100 text-left";
       });
-
       const vistaActiva = document.getElementById('vista' + vista.charAt(0).toUpperCase() + vista.slice(1));
       if (vistaActiva) vistaActiva.classList.remove('hidden');
-
-      const navActivo = document.getElementById('nav-' + vista);
-      if (navActivo) navActivo.className = "w-full flex items-center space-x-2 px-3 py-2 rounded-lg bg-indigo-50 text-indigo-900 font-bold text-left";
-
       if (window.innerWidth < 768 && sidebarAbierto) toggleSidebar();
     }
 
     function bloqueadoAlert(nombre) {
-      alert(`🔒 ${nombre} está actualmente bloqueado. Debes completar y aprobar la Tarea 1 del Módulo 1 para desbloquearlo.`);
+      alert(`🔒 ${nombre} está bloqueado hasta aprobar el Módulo 1.`);
     }
 
-    // 3. TAREAS Y AUTORRELLENO (IDEA #1)
     function ejecutarAutorrelleno() {
       document.getElementById('campoNombre').value = "Gabriel Vásquez";
       const hoy = new Date();
       document.getElementById('campoFecha').value = hoy.toLocaleDateString('es-ES');
-      alert('⚡ Datos de estudiante e inicio/fin precargados automáticamente.');
+      alert('⚡ Autorrelleno aplicado exitosamente.');
     }
 
     function editarCampo(id) {
@@ -713,77 +697,59 @@
 
     function guardarTarea(e) {
       e.preventDefault();
-      alert('¡Tarea entregada con éxito! Copia guardada en la Carpeta de Respaldos.');
+      alert('¡Tarea entregada y respaldada correctamente!');
       mostrarVista('respaldos');
     }
 
-    // 4. MODO OFFLINE (IDEA #3)
     function toggleOfflineMode() {
       esOffline = !esOffline;
-      const banner = document.getElementById('offlineBanner');
-      const text = document.getElementById('netStatusText');
-
-      if (esOffline) {
-        banner.classList.remove('hidden');
-        text.innerText = "Modo Offline";
-      } else {
-        banner.classList.add('hidden');
-        text.innerText = "Nube Activa";
-      }
+      document.getElementById('offlineBanner').classList.toggle('hidden');
     }
 
-    // 5. CHAT DEL SEMÁFORO EMOCIONAL (IDEA #2)
     function abrirSemaforoModal() { document.getElementById('modalSemaforo').classList.remove('hidden'); }
     function cerrarSemaforoModal() { document.getElementById('modalSemaforo').classList.add('hidden'); }
 
-    function filtrarSemaforo(tipo) {
-      const items = document.querySelectorAll('.item-sem');
-      items.forEach(item => {
-        if (tipo === 'todos') item.classList.remove('hidden');
-        else if (item.classList.contains('sem-' + tipo)) item.classList.remove('hidden');
-        else item.classList.add('hidden');
-      });
-    }
-
     function abrirChatEstudiante(nombre, estado) {
-      estudianteChatActual = nombre;
+      alumnoChatActual = nombre;
       document.getElementById('chatStudentName').innerText = nombre;
-      document.getElementById('chatStudentStatus').innerText = "Estado: " + estado;
-      document.getElementById('chatInitials').innerText = nombre.split(' ').map(n => n[0]).join('');
-      
-      const history = document.getElementById('chatHistory');
-      history.innerHTML = `
-        <div class="bg-amber-100 border border-amber-200 text-amber-900 p-2 rounded-lg max-w-[90%]">
-          <strong>Aviso de Seguimiento:</strong> Canal directo activo con ${nombre}.
-        </div>
-      `;
-
+      document.getElementById('chatStudentStatus').innerText = estado;
+      renderizarHistorialEstudiante();
+      document.getElementById('modalSemaforo').classList.add('hidden');
       document.getElementById('modalChatEstudiante').classList.remove('hidden');
     }
 
-    function cerrarChatEstudiante() {
-      document.getElementById('modalChatEstudiante').classList.add('hidden');
+    function cerrarChatEstudiante() { 
+      document.getElementById('modalChatEstudiante').classList.add('hidden'); 
+      document.getElementById('modalSemaforo').classList.remove('hidden'); 
     }
 
-    function enviarMensajeTutor(msg) {
-      const history = document.getElementById('chatHistory');
-      history.innerHTML += `<div class="bg-indigo-900 text-white p-2 rounded-lg max-w-[85%] ml-auto text-right">${msg}</div>`;
+    function renderizarHistorialEstudiante() {
+      const contenedor = document.getElementById('chatHistory');
+      contenedor.innerHTML = "";
+      const mensajes = chatsEstudiantes[alumnoChatActual] || [];
 
-      // Respuesta simulada de un chico motivado que quiere mejorar
-      setTimeout(() => {
-        let respuesta = "";
-        if (estudianteChatActual.includes("Carlos")) {
-          respuesta = "¡Hola Profe! Disculpe la demora. Tuve unos problemas personales pero sí quiero mejorar mi nota. Ya estoy revisando la Tarea 1 con la ayuda de la IA y la entrego hoy mismo. ¡Muchas gracias por el apoyo!";
+      mensajes.forEach(m => {
+        if (m.autor === "sistema") {
+          contenedor.innerHTML += `<div class="bg-amber-100/80 border border-amber-300 text-amber-950 p-2 rounded-lg text-[11px] text-center font-semibold">${m.texto}</div>`;
+        } else if (m.autor === "tutor") {
+          contenedor.innerHTML += `<div class="bg-indigo-900 text-white p-2.5 rounded-xl max-w-[85%] ml-auto text-right shadow-sm"><p class="font-bold text-[10px] text-indigo-200">Tutor (Tú)</p><p>${m.texto}</p></div>`;
         } else {
-          respuesta = "Hola estimado tutor, gracias por escribirme. Estaba confundida con un punto del Módulo 1, pero ya estoy revisando el respaldo para enviarlo completo.";
+          contenedor.innerHTML += `<div class="bg-white border border-slate-300 text-slate-800 p-2.5 rounded-xl max-w-[85%] shadow-sm"><p class="font-bold text-[10px] text-indigo-900">${m.autor}</p><p>${m.texto}</p></div>`;
         }
-
-        history.innerHTML += `<div class="bg-white border border-slate-300 text-slate-800 p-2.5 rounded-lg max-w-[85%] shadow-sm"><strong>${estudianteChatActual}:</strong> ${respuesta}</div>`;
-        history.scrollTop = history.scrollHeight;
-      }, 1000);
+      });
+      contenedor.scrollTop = contenedor.scrollHeight;
     }
 
-    // 6. ASISTENTE IA (IDEA #3)
+    function enviarMensajeEstudiante() {
+      const input = document.getElementById('inputChatEstudiante');
+      const texto = input.value.trim();
+      if (!texto) return;
+      if (!chatsEstudiantes[alumnoChatActual]) chatsEstudiantes[alumnoChatActual] = [];
+      chatsEstudiantes[alumnoChatActual].push({ autor: "tutor", texto: texto });
+      input.value = "";
+      renderizarHistorialEstudiante();
+    }
+
     function toggleAiChat() {
       document.getElementById('aiChatWindow').classList.toggle('hidden');
       cerrarTooltip();
@@ -791,31 +757,98 @@
 
     function cerrarTooltip() { document.getElementById('aiTooltip').classList.add('hidden'); }
 
-    function enviarMensajeIA() {
-      const input = document.getElementById('chatInput');
-      const txt = input.value.trim();
-      if (!txt) return;
+    // ==========================================
+    // LÓGICA DE AURA IA (DINÁMICA & LOCAL)
+    // ==========================================
+    function generarRespuestaAura(prompt) {
+      const p = prompt.toLowerCase().trim();
 
-      const chat = document.getElementById('chatMessages');
-      chat.innerHTML += `<div class="bg-indigo-900 text-white p-2 rounded-lg max-w-[85%] ml-auto text-right">${txt}</div>`;
-      input.value = '';
+      // Saludos y presentación
+      if (p.includes("hola") || p.includes("buenos") || p.includes("buenas") || p.includes("que tal") || p.includes("quien eres") || p.includes("saludos")) {
+        const opciones = [
+          "¡Hola, Gabriel! 👋 Estoy lista para apoyarte en lo que necesites dentro de la plataforma. ¿Qué módulo o tarea revisamos hoy?",
+          "¡Hola! Soy Aura, tu asistente en MSI Académico. Dime, ¿tienes alguna consulta sobre tus entregas, el semáforo o las salas virtuales?",
+          "¡Qué gusto saludarte! Estoy aquí para responder tus inquietudes o guiarte en el desarrollo de tus actividades académicas."
+        ];
+        return opciones[Math.floor(Math.random() * opciones.length)];
+      }
 
-      setTimeout(() => {
-        let resp = "Entendido. Recuerda que los conceptos del Módulo 1 abordan los principios fundamentales del curso. Puedes consultar la guía en la sección de lecciones.";
-        if (txt.toLowerCase().includes("resumen")) {
-          resp = "📘 **Resumen Módulo 1:** Explora las bases conceptuales y teóricas iniciales. Puntos clave: 1) Origen histórico, 2) Aplicación práctica en la comunidad, 3) Autoevaluación.";
-        } else if (txt.toLowerCase().includes("autorrelleno")) {
-          resp = "⚡ El botón 'Autorrelleno' toma automáticamente tus datos del perfil universitario y completa tu nombre, fecha y registro de hora para ahorrar tiempo.";
-        }
+      // Módulos y avance
+      if (p.includes("modulo") || p.includes("nivel") || p.includes("curso") || p.includes("desbloquear") || p.includes("origen")) {
+        const opciones = [
+          "Actualmente tienes habilitado el **Módulo 1: El Origen** en el Nivel 1. Los Niveles 2 y 3 se habilitarán conforme se registren y aprueben tus evaluaciones.",
+          "El Nivel 1 constituye la base del programa. Una vez que completes la Tarea 1 y rindas la primera lección corta, podrás continuar con el Módulo 2.",
+          "Recuerda que cada módulo combina lecturas teóricas con un análisis práctico. Si necesitas revisar tus notas, consulta la sección de **Retroalimentación**."
+        ];
+        return opciones[Math.floor(Math.random() * opciones.length)];
+      }
 
-        chat.innerHTML += `<div class="bg-indigo-100 text-indigo-900 p-2.5 rounded-lg max-w-[85%]">${resp}</div>`;
-        chat.scrollTop = chat.scrollHeight;
-      }, 700);
+      // Tareas y formulario
+      if (p.includes("tarea") || p.includes("deber") || p.includes("entrega") || p.includes("autorrelleno") || p.includes("respaldo")) {
+        const opciones = [
+          "En la pestaña **Tareas ✓** puedes utilizar la función **'AUTO RELLENO DE DATOS'** para completar de forma automática tu nombre y la fecha actual en el formulario.",
+          "Cada tarea enviada genera un archivo registrado en tu **Carpeta de Respaldos** con su respectivo código Hash único de validación.",
+          "Asegúrate de responder las dos preguntas analíticas del formulario antes de presionar el botón de **'Enviar y Respaldar Tarea'**."
+        ];
+        return opciones[Math.floor(Math.random() * opciones.length)];
+      }
+
+      // Semáforo y seguimiento de alumnos
+      if (p.includes("semaforo") || p.includes("alumno") || p.includes("estudiante") || p.includes("alerta") || p.includes("chat")) {
+        const opciones = [
+          "El **Semáforo Emocional y Académico** te permite monitorear a los estudiantes categorizados en tres estados: 🔴 Alerta Crítica, 🟡 En Observación y 🟢 Desempeño Alto.",
+          "Desde la ventana del Semáforo puedes abrir un canal directo de chat individual con cualquier alumno para brindar retroalimentación o acordar tutorías.",
+          "Los indicadores del Semáforo se actualizan según las calificaciones recibidas y el tiempo de entrega de cada trabajo."
+        ];
+        return opciones[Math.floor(Math.random() * opciones.length)];
+      }
+
+      // Preguntas de opinión, filosóficas o abiertas (Respuestas reflexivas / ambiguas)
+      const opcionesGenerales = [
+        "Comprendo la idea que planteas. En este tipo de situaciones, el impacto suele variar dependiendo del contexto práctico y la argumentación teórica que utilices.",
+        "Es un análisis valioso. Para profundizarlo más en tus tareas, podrías vincularlo con los principios clave que abordamos en la primera lectura.",
+        "Entiendo tu punto. Existen múltiples perspectivas válidas sobre ese tema; lo fundamental es respaldar la respuesta con explicaciones claras.",
+        "Buena inquietud. En la plataforma valoramos bastante el pensamiento crítico, así que ese enfoque puede enriquecer mucho tu participación en las tutorías.",
+        "Tiene sentido lo que dices. A veces las soluciones no son totalmente rígidas y admiten matices interesantes según la experiencia individual.",
+        "Es un matiz relevante. Te sugiero plasmar esa misma idea en la segunda pregunta de tu tarea para darle mayor estructura a tu entrega."
+      ];
+
+      return opcionesGenerales[Math.floor(Math.random() * opcionesGenerales.length)];
     }
 
-    function enviarMensajeRapido(m) {
-      document.getElementById('chatInput').value = m;
-      enviarMensajeIA();
+    function enviarMensajeIA() {
+      const input = document.getElementById('chatInput');
+      const promptUsuario = input.value.trim();
+      if (!promptUsuario) return;
+
+      const chat = document.getElementById('chatMessages');
+      
+      // Renderizar mensaje del usuario
+      chat.innerHTML += `<div class="bg-indigo-900 text-white p-3 rounded-xl max-w-[85%] ml-auto text-right shadow">${promptUsuario}</div>`;
+      input.value = '';
+      chat.scrollTop = chat.scrollHeight;
+
+      // Renderizar indicador de procesando
+      const typingId = 'typing-' + Date.now();
+      chat.innerHTML += `<div id="${typingId}" class="bg-indigo-100 text-indigo-900 p-2.5 rounded-xl max-w-[85%] italic text-xs flex items-center space-x-2">
+        <span class="w-2 h-2 rounded-full bg-indigo-600 animate-ping"></span>
+        <span>Aura está analizando tu consulta...</span>
+      </div>`;
+      chat.scrollTop = chat.scrollHeight;
+
+      // Respuesta fluida en 600ms
+      setTimeout(() => {
+        const typingElem = document.getElementById(typingId);
+        if (typingElem) typingElem.remove();
+
+        const respuesta = generarRespuestaAura(promptUsuario);
+        chat.innerHTML += `<div class="bg-indigo-100 text-indigo-950 p-3 rounded-xl max-w-[90%] leading-relaxed shadow-sm">${formatearTexto(respuesta)}</div>`;
+        chat.scrollTop = chat.scrollHeight;
+      }, 600);
+    }
+
+    function formatearTexto(t) {
+      return t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
     }
   </script>
 </body>
